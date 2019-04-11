@@ -10,7 +10,7 @@ public:
 	Grid();
 private:
 	void UpdateImplementation(float dt);
-	void DrawImplementation();
+	void DrawImplementation(sf::RenderWindow& rw);
 private:
 	std::vector<int> gridState;
 	//std::vector<TriangleTile> triangles;

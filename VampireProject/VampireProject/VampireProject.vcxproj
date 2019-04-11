@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\Game.hpp" />
+    <ClInclude Include="src\GameObjects\GameObjectBase.hpp" />
     <ClInclude Include="src\Managers\Input.hpp" />
     <ClInclude Include="src\GameObjects\GameObject.hpp" />
     <ClInclude Include="src\GameObjects\Grid.hpp" />

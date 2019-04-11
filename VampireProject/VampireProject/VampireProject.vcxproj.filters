@@ -92,5 +92,8 @@
     <ClInclude Include="src\Core\Game.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameObjects\GameObjectBase.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
