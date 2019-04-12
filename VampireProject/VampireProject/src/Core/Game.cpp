@@ -3,6 +3,7 @@
 #include <vector>
 #include "Game.hpp"
 #include "../GameObjects/TriangleTile.hpp"
+#include "../GameObjects/Grid.hpp"
 #include "../Math/Utils.hpp"
 #include "../Managers/Input.hpp"
 #include "../Math/Quaternion.hpp"
@@ -20,8 +21,16 @@ Game::Game()
 	srand((int)time(NULL));
 	t = 0;
 
-	//objectList.push_back(std::make_unique<GameObjectBase>(sf::Vector2f(320, 240), 20.f));
-	objectList.push_back(std::move(std::unique_ptr<GameObjectBase>(new TriangleTile(sf::Vector2f(320, 240), 50.f, sf::Color(255,255,255), 0))));
+	// objectList.push_back(std::move(std::unique_ptr<GameObjectBase>(new TriangleTile(sf::Vector2f(320, 240), 50.f, sf::Color(255,255,255), 0))));
+	
+	std::unique_ptr<Grid> p_grid = std::unique_ptr<Grid>(new Grid(sf::Vector2i(8,5), 50, sf::Vector2f(100,100)));
+	p_grid->SetPivotNode(1,1);
+	p_grid->SetPivotNode(4,2);
+	p_grid->SetPivotNode(6,2);
+	p_grid->SetPivotNode(3,3);
+	p_grid->SetTriangleTile(1,0, sf::Color(0,255,255));
+	p_grid->GenerateMissingTriangles(sf::Color(100,100,100));
+	objectList.push_back(std::move(p_grid));
 }
 
 void Game::Run() {

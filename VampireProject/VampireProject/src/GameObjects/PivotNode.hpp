@@ -2,13 +2,15 @@
 #define HEX_PIVOTNODE_H_
 
 #include "GameObject.hpp"
-/*
-class PivotNode : GameObject<PivotNode> {
+
+class PivotNode : public GameObject<PivotNode> {
 public:
-private:
-	UpdateImplementation();
-	DrawImplementation();
-};*/
+	PivotNode();
+	~PivotNode();
+public:
+	void UpdateImplementation(float dt);
+	void DrawImplementation(sf::RenderWindow& rw);
+};
 
 
 #endif // HEX_PIVOTNODE_H_
