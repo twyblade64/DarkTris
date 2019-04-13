@@ -22,25 +22,41 @@ Grid::~Grid() {
     // TODO Implement
 }
 
-void Grid::UpdateImplementation(float dt) {
+void Grid::FixedUpdateImplementation(float dt) {
+
+}
+
+void Grid::VarUpdateImplementation(float dt) {
     // TODO Implement
 
 }
 
-void Grid::DrawImplementation(sf::RenderWindow& rw) {
+void Grid::RenderImplementation(sf::RenderWindow& rw) {
     for (auto& triangleTile : triangleTileList)
-		if (triangleTile != nullptr) triangleTile->Draw(rw);
+		if (triangleTile != nullptr) triangleTile->Render(rw);
 
+    sf::CircleShape circle;
+    circle.setRadius(3);
+    circle.setOrigin(3,3);
     for (int y = 0; y < dimensions.y; ++y) {
         for (int x = 0; x < dimensions.x; ++x) {
-            sf::CircleShape circle;
-            circle.setRadius(3);
-            circle.setOrigin(3,3);
             circle.setFillColor(pivotNodeList[y*dimensions.x + x] != nullptr ? sf::Color(255,0,0) : sf::Color(255,255,255));
             circle.setPosition(nodePositionList[y * dimensions.x + x] + position);
             rw.draw(circle);
         }
     }
+
+    sf::RectangleShape rectX;
+    rectX.setFillColor(sf::Color::White);
+    rectX.setSize(sf::Vector2f(640,1));
+    rectX.setPosition(sf::Vector2f(0,mousePosition.y));
+    rw.draw(rectX);
+
+    sf::RectangleShape rectY;
+    rectY.setFillColor(sf::Color::White);
+    rectY.setSize(sf::Vector2f(1,480));
+    rectY.setPosition(sf::Vector2f(mousePosition.x,0));
+    rw.draw(rectY);
 }
 
 bool Grid::SetPivotNode(int x, int y) {
@@ -125,4 +141,18 @@ bool Grid::CheckTrianglePivotNeighbour(int x, int y) {
         break;
     }
     return false;
+}
+
+void Grid::OnMousePress(sf::Vector2f mousePosition) {
+    // TODO IMPLEMENT
+}
+
+void Grid::OnMouseRelease(sf::Vector2f mousePosition) {
+    // TODO IMPLEMENT
+}
+
+void Grid::OnMouseMove(sf::Vector2f mousePosition) {
+    this->mousePositionPrev = this->mousePosition;
+    this->mousePosition = mousePosition;
+    this->mousePositionDelta = this->mousePosition - this->mousePositionPrev;
 }

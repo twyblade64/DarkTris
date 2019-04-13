@@ -16,9 +16,10 @@ public:
 	static Game* Get();
 private:
 	static Game* mInstance;
-	void Update(sf::Time deltaTime);
-	void ProcessEvents();
+	void FixedUpdate();
+	void VarUpdate();
 	void Render();
+	void ProcessEvents();
 	void HandlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 private:
 	sf::RenderWindow window;

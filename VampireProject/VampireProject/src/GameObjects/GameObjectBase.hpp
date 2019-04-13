@@ -5,8 +5,9 @@
 
 class GameObjectBase {
 public:
-    virtual void Update(float dt) = 0;
-    virtual void Draw(sf::RenderWindow& rw) = 0;
+    virtual void FixedUpdate(float dt) = 0;
+    virtual void VarUpdate(float dt) = 0;
+    virtual void Render(sf::RenderWindow& rw) = 0;
 	virtual ~GameObjectBase() {};
 };
 

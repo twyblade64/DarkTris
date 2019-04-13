@@ -8,10 +8,14 @@ PivotNode::~PivotNode() {
     // TODO Implement
 }
 
-void PivotNode::UpdateImplementation(float dt) {
+void PivotNode::FixedUpdateImplementation(float dt) {
     // TODO Implement
 }
 
-void PivotNode::DrawImplementation(sf::RenderWindow& rw) {
+void PivotNode::VarUpdateImplementation(float dt) {
+    // TODO Implement
+}
+
+void PivotNode::RenderImplementation(sf::RenderWindow& rw) {
     // TODO Implement
 }

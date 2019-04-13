@@ -20,11 +20,15 @@ TriangleTile::~TriangleTile() {
 
 }
 
-void TriangleTile::UpdateImplementation(float dt) {
+void TriangleTile::FixedUpdateImplementation(float dt) {
 
 }
 
-void TriangleTile::DrawImplementation(sf::RenderWindow& rw) {
+void TriangleTile::VarUpdateImplementation(float dt) {
+
+}
+
+void TriangleTile::RenderImplementation(sf::RenderWindow& rw) {
     rw.draw(shape);
 }
 
