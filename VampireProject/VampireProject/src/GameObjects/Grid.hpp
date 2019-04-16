@@ -18,7 +18,7 @@ public:
 public:
 	bool SetPivotNode(int x, int y);
 	bool RemovePivotNode(int x, int y);
-	bool SetTriangleTile(int x, int y, sf::Color = sf::Color(255, 255, 255));
+	bool SetTriangleTile(int x, int y, sf::Color = sf::Color(255, 255, 255), int dir = 0);
 	void GenerateMissingTriangles(sf::Color = sf::Color(255,255,255));
 	bool RemoveTriangleTile(int x, int y);
 	bool CheckTrianglePivotNeighbour(int x, int y);
@@ -27,6 +27,9 @@ public:
 	void OnMouseRelease(sf::Vector2f mousePosition);
 	void OnMouseMove(sf::Vector2f mousePosition);
 private:
+	void RotateRight(int node);
+	void RotateLeft(int node);
+private:
 	sf::Vector2f position;
 	sf::Vector2i dimensions;
 	float triangleBase;
@@ -34,6 +37,7 @@ private:
 	float triangleRad;
 private:
 	int currentSelectedNode = -1;
+	sf::Vector2f hexRotationReference;
 	sf::Vector2f mouseDragStart;
 	sf::Vector2f mousePosition;
 	sf::Vector2f mousePositionPrev;
