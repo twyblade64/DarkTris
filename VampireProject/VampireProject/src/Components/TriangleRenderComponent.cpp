@@ -1,9 +1,8 @@
-#include "TriangleTile.hpp"
+#include "TriangleRenderComponent.hpp"
 #include "../Math/Quaternion.hpp"
 #include "../Math/Utils.hpp"
-#include "../Core/Locator.hpp"
 
-TriangleTile::TriangleTile(sf::Vector2f position, float size, sf::Color color, float rotationAngle) :
+TriangleRenderComponent::TriangleRenderComponent(sf::Vector2f position, float size, sf::Color color, float rotationAngle) :
     size(size) {
     shape.setPointCount(3);
     float rad = size * 0.58;
@@ -27,37 +26,26 @@ TriangleTile::TriangleTile(sf::Vector2f position, float size, sf::Color color, f
     pointer.setPosition(position);
 }
 
-TriangleTile::~TriangleTile() {
-
-}
-
-void TriangleTile::FixedUpdateImplementation() {
-
-}
-
-void TriangleTile::VarUpdateImplementation() {
-
-}
-
-void TriangleTile::RenderImplementation() {
-    Locator::GetWindow().GetRenderWindow().draw(shape);
+void TriangleRenderComponent::RenderImplementation() {
+    // Get RW
+    //rw.draw(shape);
     //rw.draw(pointer);
 }
 
-float TriangleTile::GetRotationAngle() {
+float TriangleRenderComponent::GetRotationAngle() {
     return shape.getRotation();
 }
 
-void TriangleTile::SetRotationAngle(float angle) {
+void TriangleRenderComponent::SetRotationAngle(float angle) {
     shape.setRotation(angle);
     pointer.setRotation(angle);
 }
 
-float TriangleTile::GetSize() {
+float TriangleRenderComponent::GetSize() {
     return size;
 }
 
-void TriangleTile::SetSize(float size) {
+void TriangleRenderComponent::SetSize(float size) {
     this->size = size;
     float rad = size * 0.58;
     for (int i = 0; i < 3; ++i) {
@@ -66,22 +54,19 @@ void TriangleTile::SetSize(float size) {
     }
 }
 
-sf::Vector2f TriangleTile::GetPosition() {
+sf::Vector2f TriangleRenderComponent::GetPosition() {
     return shape.getPosition();
 }
 
-void TriangleTile::SetPosition(sf::Vector2f position) {
+void TriangleRenderComponent::SetPosition(sf::Vector2f position) {
     shape.setPosition(position);
     pointer.setPosition(position);
 }
 
-sf::Color TriangleTile::GetColor() {
+sf::Color TriangleRenderComponent::GetColor() {
     return shape.getFillColor();
 }
 
-void TriangleTile::SetColor(sf::Color color) {
+void TriangleRenderComponent::SetColor(sf::Color color) {
     shape.setFillColor(color);
 }
-
-
-

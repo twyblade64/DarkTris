@@ -7,19 +7,17 @@
 template <class T>
 class GameObject : public GameObjectBase {
 public:
-	void FixedUpdate(float dt) {
-		static_cast<T*>(this)->FixedUpdateImplementation(dt);
+	void FixedUpdate() override {
+		static_cast<T*>(this)->FixedUpdateImplementation();
 	}
 
-	void VarUpdate(float dt) {
-		static_cast<T*>(this)->VarUpdateImplementation(dt);
+	void VarUpdate() override {
+		static_cast<T*>(this)->VarUpdateImplementation();
 	}
 
-	void Render(sf::RenderWindow& rw) {
-		static_cast<T*>(this)->RenderImplementation(rw);
+	void Render() override {
+		static_cast<T*>(this)->RenderImplementation();
 	}
-
-	virtual ~GameObject() {};
 };
 
 

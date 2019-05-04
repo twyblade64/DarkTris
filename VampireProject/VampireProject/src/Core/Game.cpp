@@ -2,31 +2,32 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include "Game.hpp"
+#include "../Core/Game.hpp"
+#include "../Core/Locator.hpp"
+#include "../Services/Window.hpp"
+#include "../Services/Time.hpp"
+#include "../Services/Input.hpp"
 #include "../GameObjects/TriangleTile.hpp"
 #include "../GameObjects/Grid.hpp"
 #include "../Math/Utils.hpp"
-#include "../Managers/Input.hpp"
 #include "../Math/Quaternion.hpp"
 
-Game* Game::mInstance;
-
-float fixedUpdateDeltaRate = 120.f;
-float fixedUpdateDeltaTime = 1.f/fixedUpdateDeltaRate;
-float fixedRenderRate = 60.f;
-float fixedRenderTime = 1.f/fixedRenderRate;
-
-float t;
-float dt;
 sf::Vector2f mousePos;
 sf::Font font;
 
-Game::Game()
-	: window(sf::VideoMode(640, 480), "HexProject") {
+Game::Game() {
+	// Init Systems
+	std::unique_ptr<Window> windowService = std::unique_ptr<Window>(new Window(640, 480, "Hex Project"));
+	std::unique_ptr<Time> timeService = std::unique_ptr<Time>(new Time(120.f, 60.f));
+	std::unique_ptr<Input> inputService = std::unique_ptr<Input>(new Input());
 
-	Managers::Input::GetInstance();
+	Locator::InitWindowService(std::move(windowService));
+	Locator::InitTimeService(std::move(timeService));
+	Locator::InitInputService(std::move(inputService));
+
 	srand((int)time(NULL));
 
+	// Setup initial state
 	font.loadFromFile("Resources/Fonts/Xolonium-Regular.otf");
 
 	std::unique_ptr<Grid> p_grid = std::unique_ptr<Grid>(new Grid(sf::Vector2i(4, 4), 100, sf::Vector2f(320 - 100 * 2, 240 - 100 * 1.5f * 0.86f)));
@@ -56,54 +57,55 @@ Game::Game()
 void Game::Run() {
 	sf::Clock clock;
 	
-	t = 0;
 	float updateAccumulator = 0.f;
 	float renderAccumulator = 0.f;
 	    
+	Time& timeService = Locator::GetTime();
+	Input& inputService = Locator::GetInput();
+	sf::RenderWindow& window = Locator::GetWindow().GetRenderWindow();
 	while (window.isOpen()) {
 		sf::Time deltaTime = clock.restart();
 
-		dt = deltaTime.asSeconds();
-		t += dt;
+		float dt = deltaTime.asSeconds();
+		timeService.UpdateTime(dt);
 
 		ProcessEvents();
+		if (!window.isOpen()) break;
 
 		updateAccumulator += dt;
-		while (updateAccumulator > fixedUpdateDeltaTime) {
+		while (updateAccumulator > timeService.GetFixedUpdateDeltaTime()) {
 			FixedUpdate();
-			updateAccumulator -= fixedUpdateDeltaTime;
+			updateAccumulator -= timeService.GetFixedUpdateDeltaTime();
 		}
 
 		VarUpdate();
 
-		if (renderAccumulator == 0)
-			Render();
+		if (renderAccumulator == 0) Render();
 		renderAccumulator += dt;
-		if (renderAccumulator > fixedRenderTime) renderAccumulator = 0;
+		if (renderAccumulator > timeService.GetFixedRenderDeltaTime()) renderAccumulator = 0;
 
-		Managers::Input::GetInstance().KeyReset();
+		inputService.KeyReset();
 	}
-}
-
-Game* Game::Get() {
-	assert(mInstance);
-	return mInstance;
 }
 
 void Game::ProcessEvents() {
 	sf::Event event;
+	Input& inputService = Locator::GetInput();
+	sf::RenderWindow& window = Locator::GetWindow().GetRenderWindow();
+
 	while (window.pollEvent(event)) {
 		switch (event.type) {
 		case sf::Event::Closed: {
+			window.clear();
 			window.close();
-			break;
+			return;
 			}
 		case sf::Event::KeyPressed:{
-			Managers::Input::GetInstance().KeyPress(event.key.code);
+			inputService.KeyPress(event.key.code);
 			break;
 			}
 		case sf::Event::KeyReleased: {
-			Managers::Input::GetInstance().KeyRelease(event.key.code);
+			inputService.KeyRelease(event.key.code);
 			break;
 			}
 		case sf::Event::MouseMoved: {
@@ -130,23 +132,24 @@ void Game::ProcessEvents() {
 
 void Game::FixedUpdate() {
 	for (auto it = objectList.begin(); it != objectList.end(); ++it) {
-		(*it)->FixedUpdate(dt);
+		(*it)->FixedUpdate();
 	}
 }
 
 void Game::VarUpdate() {
 	for (auto it = objectList.begin(); it != objectList.end(); ++it) {
-		(*it)->VarUpdate(dt);
+		(*it)->VarUpdate();
 	}
 }
 
 void Game::Render() {
+	sf::RenderWindow& window = Locator::GetWindow().GetRenderWindow();
 	window.clear();
 
 	for (auto& obj : objectList)
-		obj->Render(window);
+		obj->Render();
 
-	std::string fpsString = "FPS: " + std::to_string(1.f/dt);
+	std::string fpsString = "FPS: " + std::to_string(1.f/Locator::GetTime().GetDeltaTime());
 	sf::Text text(fpsString, font);
 	text.setCharacterSize(12);
 	text.setFillColor(sf::Color::White);

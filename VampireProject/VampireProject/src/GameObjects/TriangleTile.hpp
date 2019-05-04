@@ -10,9 +10,9 @@ public:
 	TriangleTile(sf::Vector2f position, float size, sf::Color color = sf::Color(255,255,255), float rotationAngle = 0);
 	~TriangleTile();
 public:
-	void FixedUpdateImplementation(float dt);
-	void VarUpdateImplementation(float dt);
-	void RenderImplementation(sf::RenderWindow& rw);
+	void FixedUpdateImplementation();
+	void VarUpdateImplementation();
+	void RenderImplementation();
 public:
 	float GetRotationAngle();
 	void SetRotationAngle(float angle);

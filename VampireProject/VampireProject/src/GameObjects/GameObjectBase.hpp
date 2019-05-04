@@ -5,9 +5,11 @@
 
 class GameObjectBase {
 public:
-    virtual void FixedUpdate(float dt) = 0;
-    virtual void VarUpdate(float dt) = 0;
-    virtual void Render(sf::RenderWindow& rw) = 0;
+    sf::Vector2f position;
+public:
+    virtual void FixedUpdate() = 0;
+    virtual void VarUpdate() = 0;
+    virtual void Render() = 0;
 	virtual ~GameObjectBase() {};
 };
 

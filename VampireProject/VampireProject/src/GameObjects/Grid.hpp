@@ -3,18 +3,18 @@
 
 #include <vector>
 #include <memory>
-#include "GameObject.hpp"
-#include "TriangleTile.hpp"
-#include "PivotNode.hpp"
+#include "../GameObjects/GameObject.hpp"
+#include "../GameObjects/TriangleTile.hpp"
+#include "../GameObjects/PivotNode.hpp"
 
 class Grid : public GameObject<Grid> {
 public:
 	Grid(sf::Vector2i dimensions, float tileSize, sf::Vector2f position = sf::Vector2f(0,0));
 	~Grid();
 public:
-	void FixedUpdateImplementation(float dt);
-	void VarUpdateImplementation(float dt);
-	void RenderImplementation(sf::RenderWindow& rw);
+	void FixedUpdateImplementation();
+	void VarUpdateImplementation();
+	void RenderImplementation();
 public:
 	bool SetPivotNode(int x, int y);
 	bool RemovePivotNode(int x, int y);

@@ -127,19 +127,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\TriangleRenderComponent.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
-    <ClCompile Include="src\Core\Main.cpp" />
+    <ClCompile Include="src\Core\Locator.cpp" />
+    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\GameObjects\Grid.cpp" />
     <ClCompile Include="src\GameObjects\PivotNode.cpp" />
     <ClCompile Include="src\GameObjects\TriangleTile.cpp" />
-    <ClCompile Include="src\Managers\Input.cpp" />
+    <ClCompile Include="src\Services\Input.cpp" />
     <ClCompile Include="src\Math\Quaternion.cpp" />
     <ClCompile Include="src\Math\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components\TriangleRenderComponent.hpp" />
+    <ClInclude Include="src\Core\Component.hpp" />
     <ClInclude Include="src\Core\Game.hpp" />
+    <ClInclude Include="src\Core\Locator.hpp" />
     <ClInclude Include="src\GameObjects\GameObjectBase.hpp" />
-    <ClInclude Include="src\Managers\Input.hpp" />
+    <ClInclude Include="src\Services\Input.hpp" />
     <ClInclude Include="src\GameObjects\GameObject.hpp" />
     <ClInclude Include="src\GameObjects\Grid.hpp" />
     <ClInclude Include="src\GameObjects\PivotNode.hpp" />
@@ -147,6 +152,8 @@
     <ClInclude Include="src\Math\Constants.hpp" />
     <ClInclude Include="src\Math\Quaternion.hpp" />
     <ClInclude Include="src\Math\Utils.hpp" />
+    <ClInclude Include="src\Services\Time.hpp" />
+    <ClInclude Include="src\Services\Window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

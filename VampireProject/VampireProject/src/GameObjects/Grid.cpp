@@ -2,6 +2,7 @@
 #include "Grid.hpp"
 #include "../Math/Utils.hpp"
 #include "../Math/Quaternion.hpp"
+#include "../Core/Locator.hpp"
 
 Grid::Grid(sf::Vector2i dimensions, float tileSize, sf::Vector2f position):
     dimensions(dimensions), triangleBase(tileSize), position(position) {
@@ -25,18 +26,19 @@ Grid::~Grid() {
     // TODO Implement
 }
 
-void Grid::FixedUpdateImplementation(float dt) {
+void Grid::FixedUpdateImplementation() {
 
 }
 
-void Grid::VarUpdateImplementation(float dt) {
+void Grid::VarUpdateImplementation() {
     // TODO Implement
 
 }
 
-void Grid::RenderImplementation(sf::RenderWindow& rw) {
+void Grid::RenderImplementation() {
+    sf::RenderWindow& rw = Locator::GetWindow().GetRenderWindow();
     for (auto& triangleTile : triangleTileList)
-		if (triangleTile != nullptr) triangleTile->Render(rw);
+		if (triangleTile != nullptr) triangleTile->Render();
 
     sf::CircleShape circle;
     circle.setRadius(3);

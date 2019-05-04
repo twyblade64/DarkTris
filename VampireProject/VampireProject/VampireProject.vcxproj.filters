@@ -37,14 +37,20 @@
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{a630ebf1-5ac8-40aa-b4de-b177637043d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{f895f3e9-b10d-45f4-8392-3354e3a8dee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{ab9d63fc-dbe0-4ae8-886b-a169717622d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{9929e016-9301-418a-91a8-bdce396fdbac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{81d3dcb9-3160-493d-b181-ba4a5e4de88b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Managers\Input.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="src\Core\Game.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -63,6 +69,18 @@
     <ClCompile Include="src\Math\Utils.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\TriangleRenderComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Locator.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Services\Input.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameObjects\GameObject.hpp">
@@ -76,9 +94,6 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\PivotNode.hpp">
       <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Managers\Input.hpp">
-      <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Math\Quaternion.hpp">
       <Filter>Header Files\Math</Filter>
@@ -94,6 +109,24 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\GameObjectBase.hpp">
       <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Component.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\TriangleRenderComponent.hpp">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Locator.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Services\Window.hpp">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Services\Time.hpp">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Services\Input.hpp">
+      <Filter>Header Files\Services</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

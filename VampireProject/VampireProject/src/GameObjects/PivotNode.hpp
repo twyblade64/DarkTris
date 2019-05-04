@@ -8,9 +8,9 @@ public:
 	PivotNode();
 	~PivotNode();
 public:
-	void FixedUpdateImplementation(float dt);
-	void VarUpdateImplementation(float dt);
-	void RenderImplementation(sf::RenderWindow& rw);
+	void FixedUpdateImplementation();
+	void VarUpdateImplementation();
+	void RenderImplementation();
 };
 
 
