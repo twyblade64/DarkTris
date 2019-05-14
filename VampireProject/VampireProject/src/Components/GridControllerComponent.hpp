@@ -1,12 +1,14 @@
 #ifndef HEX_GRID_CONTROLLER_COMPONENT_H_
 #define HEX_GRID_CONTROLLER_COMPONENT_H_
 
+#include "../Core/Component.hpp"
 #include <vector>
 #include <memory>
-#include "../GameObjects/GameObject.hpp"
-#include "../GameObjects/TriangleTile.hpp"
-#include "../GameObjects/PivotNode.hpp"
-#include "../Core/Component.hpp"
+#include "SFML/System.hpp"
+#include "SFML/Graphics.hpp"
+
+class TriangleTile;
+class PivotNode;
 
 class GridControllerComponent : public Component<GridControllerComponent> {
 public:

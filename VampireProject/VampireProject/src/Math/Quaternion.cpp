@@ -83,7 +83,7 @@ Quaternion Quaternion::LookRotation(const sf::Vector3f& forward, const sf::Vecto
 
 	float d = Vector3fDot(v0, v1);
 	// If dot == 1, vectors are the same
-	/*if (d >= 1.0f)
+	if (d >= 1.0f)
 	{
 		return Quaternion::Identity();
 	}
@@ -105,7 +105,7 @@ Quaternion Quaternion::LookRotation(const sf::Vector3f& forward, const sf::Vecto
 		}
 	}
 	else
-	{*/
+	{
 		float s = sqrt((1 + d) * 2);
 		float invs = 1 / s;
 
@@ -116,7 +116,7 @@ Quaternion Quaternion::LookRotation(const sf::Vector3f& forward, const sf::Vecto
 		q.z = c.z * invs;
 		q.w = s * 0.5f;
 		q.Normalize();
-	//}
+	}
 	return q;
 }
 

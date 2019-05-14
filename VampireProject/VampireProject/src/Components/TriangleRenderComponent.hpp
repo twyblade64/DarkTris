@@ -2,8 +2,8 @@
 #define HEX_TRIANGLE_RENDER_COMPONENT_H_
 
 #include "../Core/Component.hpp"
-#include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
+#include "SFML/Graphics.hpp"
 
 class TriangleRenderComponent: public Component<TriangleRenderComponent> {
 public:

@@ -3,8 +3,9 @@
 #include "../Math/Utils.hpp"
 #include "../Math/Quaternion.hpp"
 #include "../Core/Locator.hpp"
-#include "../Services/Input.hpp"
 #include "../Components/TriangleRenderComponent.hpp"
+#include "../GameObjects/TriangleTile.hpp"
+#include "../GameObjects/PivotNode.hpp"
 
 GridControllerComponent::GridControllerComponent(sf::Vector2i dimensions, float tileSize, sf::Vector2f position):
     dimensions(dimensions), triangleBase(tileSize), position(position) {
