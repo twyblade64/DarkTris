@@ -138,6 +138,8 @@
     <ClCompile Include="src\Services\Input.cpp" />
     <ClCompile Include="src\Math\Quaternion.cpp" />
     <ClCompile Include="src\Math\Utils.cpp" />
+    <ClCompile Include="src\States\GameState.cpp" />
+    <ClCompile Include="src\States\MenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\GridControllerComponent.hpp" />
@@ -145,6 +147,7 @@
     <ClInclude Include="src\Core\Component.hpp" />
     <ClInclude Include="src\Core\Game.hpp" />
     <ClInclude Include="src\Core\Locator.hpp" />
+    <ClInclude Include="src\Core\State.hpp" />
     <ClInclude Include="src\GameObjects\GameObjectBase.hpp" />
     <ClInclude Include="src\Services\Input.hpp" />
     <ClInclude Include="src\GameObjects\GameObject.hpp" />
@@ -156,6 +159,8 @@
     <ClInclude Include="src\Math\Utils.hpp" />
     <ClInclude Include="src\Services\Time.hpp" />
     <ClInclude Include="src\Services\Window.hpp" />
+    <ClInclude Include="src\States\GameState.hpp" />
+    <ClInclude Include="src\States\MenuState.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

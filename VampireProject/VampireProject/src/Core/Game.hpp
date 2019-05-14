@@ -3,10 +3,12 @@
 
 #include <list>
 #include <memory>
-#include "../GameObjects/GameObjectBase.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/System/Vector2.hpp>
+#include "../GameObjects/GameObjectBase.hpp"
+#include "../States/GameState.hpp"
+#include "../States/MenuState.hpp"
 
 class Game {
 public:
@@ -18,8 +20,12 @@ private:
 	void Render();
 	void ProcessEvents();
 	void HandlePlayerInput(sf::Keyboard::Key key, bool isPressed);
-private:
+public:
 	std::list<std::unique_ptr<GameObjectBase>> objectList;
+private:
+	State* mCurrentState;
+	GameState mGameState;
+	MenuState mMenuState;
 };
 
 #endif // HEX_GAME_H_
