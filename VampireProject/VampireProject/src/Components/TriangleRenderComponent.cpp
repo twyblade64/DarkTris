@@ -1,6 +1,7 @@
 #include "TriangleRenderComponent.hpp"
 #include "../Math/Quaternion.hpp"
 #include "../Math/Utils.hpp"
+#include "../Core/Locator.hpp"
 
 TriangleRenderComponent::TriangleRenderComponent(sf::Vector2f position, float size, sf::Color color, float rotationAngle) :
     size(size) {
@@ -27,8 +28,8 @@ TriangleRenderComponent::TriangleRenderComponent(sf::Vector2f position, float si
 }
 
 void TriangleRenderComponent::RenderImplementation() {
-    // Get RW
-    //rw.draw(shape);
+    sf::RenderWindow& rw = Locator::GetWindow().GetRenderWindow();
+    rw.draw(shape);
     //rw.draw(pointer);
 }
 

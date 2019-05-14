@@ -9,6 +9,7 @@
 #include "../Services/Input.hpp"
 #include "../GameObjects/TriangleTile.hpp"
 #include "../GameObjects/Grid.hpp"
+#include "../Components/GridControllerComponent.hpp"
 #include "../Math/Utils.hpp"
 #include "../Math/Quaternion.hpp"
 
@@ -31,26 +32,28 @@ Game::Game() {
 	font.loadFromFile("Resources/Fonts/Xolonium-Regular.otf");
 
 	std::unique_ptr<Grid> p_grid = std::unique_ptr<Grid>(new Grid(sf::Vector2i(4, 4), 100, sf::Vector2f(320 - 100 * 2, 240 - 100 * 1.5f * 0.86f)));
-	p_grid->SetPivotNode(1,1);
-	p_grid->SetPivotNode(1,2);
-	p_grid->SetPivotNode(2,2);
+	GridControllerComponent& gcc = p_grid->GetGridController();
 
-	p_grid->SetTriangleTile(1,0, sf::Color(255,100,50), 1);
-	p_grid->SetTriangleTile(2,0, sf::Color(255,100,50), 0);
-	p_grid->SetTriangleTile(3,0, sf::Color(255,100,50),-1);
-	p_grid->SetTriangleTile(3,1, sf::Color(255,100,50), 1);
+	gcc.SetPivotNode(1,1);
+	gcc.SetPivotNode(1,2);
+	gcc.SetPivotNode(2,2);
 
-	p_grid->SetTriangleTile(0,1, sf::Color(50,255,50),  1);
-	p_grid->SetTriangleTile(1,1, sf::Color(50,255,50),  0);
-	p_grid->SetTriangleTile(0,2, sf::Color(50,255,50), -1);
-	p_grid->SetTriangleTile(1,2, sf::Color(50,255,50),  0);
+	gcc.SetTriangleTile(1,0, sf::Color(255,100,50), 1);
+	gcc.SetTriangleTile(2,0, sf::Color(255,100,50), 0);
+	gcc.SetTriangleTile(3,0, sf::Color(255,100,50),-1);
+	gcc.SetTriangleTile(3,1, sf::Color(255,100,50), 1);
 
-	p_grid->SetTriangleTile(2,2, sf::Color(50,50,255), -1);
-	p_grid->SetTriangleTile(3,2, sf::Color(50,50,255),  0);
-	p_grid->SetTriangleTile(4,2, sf::Color(50,50,255),  1);
-	p_grid->SetTriangleTile(4,1, sf::Color(50,50,255), -1);
+	gcc.SetTriangleTile(0,1, sf::Color(50,255,50),  1);
+	gcc.SetTriangleTile(1,1, sf::Color(50,255,50),  0);
+	gcc.SetTriangleTile(0,2, sf::Color(50,255,50), -1);
+	gcc.SetTriangleTile(1,2, sf::Color(50,255,50),  0);
 
-	p_grid->GenerateMissingTriangles(sf::Color(50,50,50));
+	gcc.SetTriangleTile(2,2, sf::Color(50,50,255), -1);
+	gcc.SetTriangleTile(3,2, sf::Color(50,50,255),  0);
+	gcc.SetTriangleTile(4,2, sf::Color(50,50,255),  1);
+	gcc.SetTriangleTile(4,1, sf::Color(50,50,255), -1);
+
+	gcc.GenerateMissingTriangles(sf::Color(50,50,50));
 	objectList.push_back(std::move(p_grid));
 }
 
@@ -84,7 +87,7 @@ void Game::Run() {
 		renderAccumulator += dt;
 		if (renderAccumulator > timeService.GetFixedRenderDeltaTime()) renderAccumulator = 0;
 
-		inputService.KeyReset();
+		inputService.InputReset();
 	}
 }
 
@@ -110,20 +113,15 @@ void Game::ProcessEvents() {
 			}
 		case sf::Event::MouseMoved: {
 			sf::Vector2f mousePos = sf::Vector2f((float)event.mouseMove.x, (float)event.mouseMove.y);
-			Grid& g  = static_cast<Grid&>(*objectList.front());
-			g.OnMouseMove(mousePos);
+			inputService.MouseMove(mousePos);
 			break;
 			}
 		case sf::Event::MouseButtonPressed: {
-			sf::Vector2f mousePos = sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y);
-			Grid& g  = static_cast<Grid&>(*objectList.front());
-			g.OnMousePress(mousePos);
+			inputService.MousePress(event.mouseButton.button);
 			break;
 			}
 		case sf::Event::MouseButtonReleased: {
-			sf::Vector2f mousePos = sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y);
-			Grid& g  = static_cast<Grid&>(*objectList.front());
-			g.OnMouseRelease(mousePos);
+			inputService.MouseRelease(event.mouseButton.button);
 			break;
 			}
 		}

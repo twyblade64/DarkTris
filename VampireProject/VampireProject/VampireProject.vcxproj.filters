@@ -81,6 +81,9 @@
     <ClCompile Include="src\Services\Input.cpp">
       <Filter>Source Files\Services</Filter>
     </ClCompile>
+    <ClCompile Include="src\Components\GridControllerComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameObjects\GameObject.hpp">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="src\Services\Input.hpp">
       <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\GridControllerComponent.hpp">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -17,7 +17,7 @@ public:
 	void SetPosition(sf::Vector2f position);
 	sf::Color GetColor();
 	void SetColor(sf::Color color);
-private:
+public:
     void FixedUpdateImplementation() {}
     void VarUpdateImplementation() {}
     void RenderImplementation();
