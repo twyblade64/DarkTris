@@ -8,6 +8,7 @@
 #include "../Services/Input.hpp"
 #include "../Math/Utils.hpp"
 #include "../Math/Quaternion.hpp"
+#include "../Constants/Resources.hpp"
 
 sf::Vector2f mousePos;
 sf::Font font;
@@ -17,10 +18,12 @@ Game::Game() : mGameState(*this), mMenuState(*this) {
 	std::unique_ptr<Window> windowService = std::unique_ptr<Window>(new Window(640, 480, "Hex Project"));
 	std::unique_ptr<Time> timeService = std::unique_ptr<Time>(new Time(120.f, 60.f));
 	std::unique_ptr<Input> inputService = std::unique_ptr<Input>(new Input());
+	std::unique_ptr<ResourceLoader> resourceLoaderService = std::unique_ptr<ResourceLoader>(new ResourceLoader());
 
 	Locator::InitWindowService(std::move(windowService));
 	Locator::InitTimeService(std::move(timeService));
 	Locator::InitInputService(std::move(inputService));
+	Locator::InitResourceLoaderService(std::move(resourceLoaderService));
 
 	srand((int)time(NULL));
 
@@ -29,7 +32,7 @@ Game::Game() : mGameState(*this), mMenuState(*this) {
 	mCurrentState->Enter();
 
 	// Resource load (?)
-	font.loadFromFile("Resources/Fonts/Xolonium-Regular.otf");
+	Locator::GetResourceLoader().LoadFont(RES_FONT_DEBUG_ID, RES_FONT_DEBUG_PATH);
 }
 
 void Game::Run() {
@@ -129,11 +132,14 @@ void Game::Render() {
 	for (auto& obj : objectList)
 		obj->Render();
 
-	std::string fpsString = "FPS: " + std::to_string(1.f/Locator::GetTime().GetDeltaTime());
-	sf::Text text(fpsString, font);
-	text.setCharacterSize(12);
-	text.setFillColor(sf::Color::White);
-	window.draw(text);
+	ResourceLoader& resourceLoader = Locator::GetResourceLoader();
+	if (resourceLoader.CheckFont(RES_FONT_DEBUG_ID)) {
+		std::string fpsString = "FPS: " + std::to_string(1.f/Locator::GetTime().GetDeltaTime());
+		sf::Text text(fpsString, *resourceLoader.GetFont(RES_FONT_DEBUG_ID));
+		text.setCharacterSize(12);
+		text.setFillColor(sf::Color::White);
+		window.draw(text);
+	}
 
 	window.display();
 }

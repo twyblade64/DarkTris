@@ -6,7 +6,7 @@
 TriangleRenderComponent::TriangleRenderComponent(sf::Vector2f position, float size, sf::Color color, float rotationAngle) :
     size(size) {
     shape.setPointCount(3);
-    float rad = size * 0.58;
+    float rad = size * 0.58f;
     for (int i = 0; i < 3; ++i) {
         sf::Vector3f point = Quaternion::AngleAxis(i*120.f, sf::Vector3f(0,0,1)) * sf::Vector3f(0,-rad,0);
         shape.setPoint(i, Vector3fToVector2f(point));
@@ -15,7 +15,7 @@ TriangleRenderComponent::TriangleRenderComponent(sf::Vector2f position, float si
     shape.setRotation(rotationAngle);
     shape.setPosition(position);
 
-    float sep = size * 0.86602 - rad;
+    float sep = size * 0.86602f - rad;
     pointer.setPointCount(3);
     for (int i = 0; i < 3; ++i) {
         sf::Vector3f point = Quaternion::AngleAxis(i*120.f, sf::Vector3f(0,0,1)) * sf::Vector3f(0,-rad*0.25f,0);
@@ -48,7 +48,7 @@ float TriangleRenderComponent::GetSize() {
 
 void TriangleRenderComponent::SetSize(float size) {
     this->size = size;
-    float rad = size * 0.58;
+    float rad = size * 0.58f;
     for (int i = 0; i < 3; ++i) {
         sf::Vector3f point = Quaternion::AngleAxis(i*120.f, sf::Vector3f(0,0,1)) * sf::Vector3f(0,-rad,0);
         shape.setPoint(i, Vector3fToVector2f(point));

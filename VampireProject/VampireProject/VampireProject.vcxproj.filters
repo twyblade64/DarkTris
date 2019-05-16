@@ -55,6 +55,9 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{ea0bd895-9168-4ab6-be8d-9f5891a19fa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Constants">
+      <UniqueIdentifier>{4689f9b6-4ad3-4be9-b30a-54804e42c57b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Game.cpp">
@@ -95,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="src\States\GameState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Services\ResourceLoader.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="src\States\GameState.hpp">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Services\ResourceLoader.hpp">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Constants\Resources.hpp">
+      <Filter>Header Files\Constants</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
