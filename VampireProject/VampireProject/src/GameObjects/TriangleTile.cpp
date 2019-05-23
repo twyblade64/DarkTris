@@ -4,7 +4,7 @@
 #include "../Core/Locator.hpp"
 
 TriangleTile::TriangleTile(sf::Vector2f position, float size, sf::Color color, float rotationAngle) :
-    mTriangleRenderComponent(position, size, color, rotationAngle) {
+    GameObject<TriangleTile>(position), mTriangleRenderComponent(position, size, color, rotationAngle) {
 
 }
 

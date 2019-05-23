@@ -5,8 +5,8 @@
 #include "../Core/Locator.hpp"
 #include "../Components/TriangleRenderComponent.hpp"
 
-Grid::Grid(sf::Vector2i dimensions, float tileSize, sf::Vector2f position):
-    mGridControllerComponent(dimensions, tileSize, position) {
+Grid::Grid(sf::Vector2f position, sf::Vector2i dimensions, float tileSize):
+    GameObject<Grid>(position), mGridControllerComponent(dimensions, tileSize, position) {
 }
 
 Grid::~Grid() { }

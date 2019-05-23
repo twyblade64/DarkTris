@@ -7,7 +7,7 @@ GameState::GameState(Game& game) : mGame(game) {
 }
 
 void GameState::Enter() {
-    std::unique_ptr<Grid> p_grid = std::unique_ptr<Grid>(new Grid(sf::Vector2i(4, 4), 100, sf::Vector2f(320 - 100 * 2, 240 - 100 * 1.5f * 0.86f)));
+    std::unique_ptr<Grid> p_grid = std::unique_ptr<Grid>(new Grid(sf::Vector2f(320 - 100 * 2, 240 - 100 * 1.5f * 0.86f), sf::Vector2i(4, 4), 100));
 	GridControllerComponent& gcc = p_grid->GetGridController();
 
 	gcc.SetPivotNode(1,1);

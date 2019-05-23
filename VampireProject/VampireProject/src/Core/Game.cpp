@@ -28,11 +28,12 @@ Game::Game() : mGameState(*this), mMenuState(*this) {
 	srand((int)time(NULL));
 
 	// Setup initial state
-	mCurrentState = &mGameState;
+	Locator::GetResourceLoader().LoadFont(RES_FONT_DEBUG_ID, RES_FONT_DEBUG_PATH);
+	
+	mCurrentState = &mMenuState;
 	mCurrentState->Enter();
 
 	// Resource load (?)
-	Locator::GetResourceLoader().LoadFont(RES_FONT_DEBUG_ID, RES_FONT_DEBUG_PATH);
 }
 
 void Game::Run() {

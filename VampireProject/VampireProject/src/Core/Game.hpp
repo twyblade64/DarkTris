@@ -24,6 +24,7 @@ public:
 	std::list<std::unique_ptr<GameObjectBase>> objectList;
 private:
 	State* mCurrentState;
+public:
 	GameState mGameState;
 	MenuState mMenuState;
 };

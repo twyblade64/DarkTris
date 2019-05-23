@@ -5,8 +5,8 @@
 
 class PivotNode : public GameObject<PivotNode> {
 public:
-	PivotNode();
-	~PivotNode();
+	PivotNode(sf::Vector2f position = sf::Vector2f(0,0));
+	~PivotNode() override;
 public:
 	void FixedUpdateImplementation();
 	void VarUpdateImplementation();

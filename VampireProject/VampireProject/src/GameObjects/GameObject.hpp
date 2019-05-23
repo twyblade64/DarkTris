@@ -7,6 +7,8 @@
 template <class T>
 class GameObject : public GameObjectBase {
 public:
+	GameObject(sf::Vector2f position) :GameObjectBase(position) { };
+public:
 	void FixedUpdate() override {
 		static_cast<T*>(this)->FixedUpdateImplementation();
 	}

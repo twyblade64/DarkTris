@@ -66,4 +66,17 @@ inline sf::Vector2f Vector2fNormalize(sf::Vector2f& a) {
 	return a;
 }
 
+inline sf::Vector2f Vector2fAbs(sf::Vector2f a) {
+	a.x = abs(a.x);
+	a.y = abs(a.y);
+	return a;
+}
+
+inline sf::Vector3f Vector3fAbs(sf::Vector3f a) {
+	a.x = abs(a.x);
+	a.y = abs(a.y);
+	a.z = abs(a.z);
+	return a;
+}
+
 #endif // HEX_UTILS_H_

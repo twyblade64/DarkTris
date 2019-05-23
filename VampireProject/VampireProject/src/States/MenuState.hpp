@@ -12,6 +12,9 @@ public:
     virtual State* Update() override;
     virtual void Exit() override;
 private:
+    void ChangeToGame();
+private:
+    bool mChangeToGame;
     Game& mGame;
 };
 

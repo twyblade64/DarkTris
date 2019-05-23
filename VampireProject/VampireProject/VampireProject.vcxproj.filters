@@ -58,6 +58,9 @@
     <Filter Include="Header Files\Constants">
       <UniqueIdentifier>{4689f9b6-4ad3-4be9-b30a-54804e42c57b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{c96c5c7b-5dee-440a-9258-e7f106ba7256}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Game.cpp">
@@ -70,6 +73,9 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\Grid.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Button.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="src\Math\Quaternion.cpp">
@@ -93,6 +99,12 @@
     <ClCompile Include="src\Components\GridControllerComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\Components\ButtonControllerComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\DefaultButtonControllerComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="src\States\MenuState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
@@ -114,6 +126,9 @@
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\PivotNode.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Button.hpp">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="src\Math\Quaternion.hpp">
@@ -152,6 +167,12 @@
     <ClInclude Include="src\Components\GridControllerComponent.hpp">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\ButtonControllerComponent.hpp">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\DefaultButtonControllerComponent.hpp">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="src\Core\State.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -166,6 +187,15 @@
     </ClInclude>
     <ClInclude Include="src\Constants\Resources.hpp">
       <Filter>Header Files\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utility\Command.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utility\MemberCommand.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utility\StaticCommand.hpp">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

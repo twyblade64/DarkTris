@@ -1,6 +1,6 @@
 #include "PivotNode.hpp"
 
-PivotNode::PivotNode() {
+PivotNode::PivotNode(sf::Vector2f position) : GameObject<PivotNode>(position) {
     // TODO Implement
 }
 

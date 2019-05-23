@@ -6,7 +6,7 @@
 
 class Grid : public GameObject<Grid> {
 public:
-	Grid(sf::Vector2i dimensions, float tileSize, sf::Vector2f position = sf::Vector2f(0,0));
+	Grid(sf::Vector2f position, sf::Vector2i dimensions, float tileSize);
 	~Grid();
 public:
 	void FixedUpdateImplementation();
