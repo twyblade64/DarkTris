@@ -1,4 +1,5 @@
 #include <limits>
+#include <iostream>
 #include "GridControllerComponent.hpp"
 #include "../Math/Utils.hpp"
 #include "../Math/Quaternion.hpp"
@@ -177,7 +178,7 @@ void GridControllerComponent::OnMousePress() {
 }
 
 void GridControllerComponent::OnMouseRelease() {
-    // TODO Implement new triangle states
+    if (currentSelectedNode != -1) ResetPosition(currentSelectedNode);
     currentSelectedNode = -1;
 }
 
@@ -200,6 +201,8 @@ void GridControllerComponent::OnMouseMove(sf::Vector2f mousePosition) {
                     hexRotationReference = Vector3fToVector2f(Quaternion::AngleAxis(-60, sf::Vector3f(0,0,1)) * Vector2fToVector3f(hexRotationReference));
                 }
             }
+
+            RotateNode(currentSelectedNode);
         }
     }
 }
@@ -256,6 +259,65 @@ void GridControllerComponent::RotateLeft(int node) {
             int ty = triangleIndices[i] / ((dimensions.x-1)*2);
             trc.SetRotationAngle(trc.GetRotationAngle() - 60);
             trc.SetPosition(sf::Vector2f(triangleBase * 0.5f * (1 + tx), ty * triangleHeight + ((tx + ty) % 2 == 0 ? triangleHeight - triangleRad : triangleRad)) + position);
+        }
+    }
+}
+
+void GridControllerComponent::ResetPosition(int node) {
+    int nx = node % dimensions.x;
+    int ny = node / dimensions.x;
+    int dx = (dimensions.x-1)*2;
+    int dy = (dimensions.y-1);
+
+    if (nx > 0 && ny > 0 && nx < dimensions.x - 1 && ny < dimensions.y - 1) {
+        int triangleIndices[6];
+
+        for (int i = 0; i < 6; ++i) triangleIndices[i] = (ny - 1 + i/3)*dx + (nx-1)*2 + (i/3==0?i%3:2-i%3) + (ny%2);
+
+        for (int i = 0; i < 6; ++i) {
+            TriangleRenderComponent& trc = triangleTileList[triangleIndices[i]]->GetTriangleRenderComponent();
+
+            int tx = triangleIndices[i] % ((dimensions.x-1)*2);
+            int ty = triangleIndices[i] / ((dimensions.x-1)*2);
+            trc.SetRotationAngle(i * 60);
+            trc.SetPosition(sf::Vector2f(triangleBase * 0.5f * (1 + tx), ty * triangleHeight + ((tx + ty) % 2 == 0 ? triangleHeight - triangleRad : triangleRad)) + position);
+        }
+    }
+}
+
+void GridControllerComponent::RotateNode(int node) {
+    int nx = node % dimensions.x;
+    int ny = node / dimensions.x;
+    int dx = (dimensions.x-1)*2;
+    int dy = (dimensions.y-1);
+    Quaternion rotation = Quaternion::LookRotation(Vector2fToVector3f(hexRotationReference), Vector3fNormalized(Vector2fToVector3f(mousePosition - nodePositionList[currentSelectedNode] - position)));
+    sf::Vector2f mouseDir = Vector2fNormalized(mousePosition - nodePositionList[currentSelectedNode] - position);
+    // float rotationAngle = acos(Vector2fDot(hexRotationReference, Vector2fNormalized(mousePosition - nodePositionList[currentSelectedNode] - position))) * 180 / 3.1416;
+    float rotationAngle = acos(rotation.w) * 2 * 180 / 3.1416 * (Vector2fDot(Vector2fPerp(hexRotationReference), mouseDir) > 0 ? -1 : 1);
+    std::cout << rotationAngle << std::endl;
+    std::cout << "Ref:  " << Vector2fToVector3f(hexRotationReference) << std::endl;
+    std::cout << "Dis:  " << Vector2fNormalized(mousePosition - nodePositionList[node]) << std::endl;
+    std::cout << "Mouse: " << mousePosition << std::endl;
+    std::cout << "Node:  " <<  nodePositionList[node] - position << std::endl;
+
+    if (nx > 0 && ny > 0 && nx < dimensions.x - 1 && ny < dimensions.y - 1) {
+        int triangleIndices[6];
+
+        for (int i = 0; i < 6; ++i) triangleIndices[i] = (ny - 1 + i/3)*dx + (nx-1)*2 + (i/3==0?i%3:2-i%3) + (ny%2);
+
+        for (int i = 0; i < 6; ++i) {
+            TriangleRenderComponent& trc = triangleTileList[triangleIndices[i]]->GetTriangleRenderComponent();
+
+            int tx = triangleIndices[i] % ((dimensions.x-1)*2);
+            int ty = triangleIndices[i] / ((dimensions.x-1)*2);
+            trc.SetRotationAngle(i * 60 - rotationAngle);
+            trc.SetPosition(
+                Vector3fToVector2f(
+                    rotation * Vector2fToVector3f(
+                        sf::Vector2f(triangleBase * 0.5f * (1 + tx), ty * triangleHeight + ((tx + ty) % 2 == 0 ? triangleHeight - triangleRad : triangleRad)) 
+                        - nodePositionList[currentSelectedNode])
+                ) + nodePositionList[currentSelectedNode] + position
+            );
         }
     }
 }

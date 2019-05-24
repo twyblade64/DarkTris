@@ -2,6 +2,7 @@
 #include "../Math/Quaternion.hpp"
 #include "../Math/Utils.hpp"
 #include "../Core/Locator.hpp"
+#include "../Constants/Resources.hpp"
 
 TriangleRenderComponent::TriangleRenderComponent(sf::Vector2f position, float size, sf::Color color, float rotationAngle) :
     size(size) {
@@ -25,11 +26,20 @@ TriangleRenderComponent::TriangleRenderComponent(sf::Vector2f position, float si
     pointer.setFillColor(sf::Color(50,50,50));
     pointer.setRotation(rotationAngle);
     pointer.setPosition(position);
+
+    sprite = sf::Sprite(*Locator::GetResourceLoader().LoadTexture(RES_TEXTURE_TRIANGLE_ID, RES_TEXTURE_TRIANGLE_PATH));
+    sf::Vector2f spriteSize = sf::Vector2f(sprite.getTextureRect().width, sprite.getTextureRect().height);
+    sprite.setOrigin(spriteSize * 0.5f);
+    sprite.setColor(color);
+    sprite.setRotation(rotationAngle);
+    sprite.setPosition(position);
+    sprite.setScale(sf::Vector2f(size / (spriteSize.x*.8f), size / (spriteSize.y*.8f)) );
 }
 
 void TriangleRenderComponent::RenderImplementation() {
     sf::RenderWindow& rw = Locator::GetWindow().GetRenderWindow();
     rw.draw(shape);
+    rw.draw(sprite);
     //rw.draw(pointer);
 }
 
@@ -40,6 +50,7 @@ float TriangleRenderComponent::GetRotationAngle() {
 void TriangleRenderComponent::SetRotationAngle(float angle) {
     shape.setRotation(angle);
     pointer.setRotation(angle);
+    sprite.setRotation(angle);
 }
 
 float TriangleRenderComponent::GetSize() {
@@ -62,6 +73,7 @@ sf::Vector2f TriangleRenderComponent::GetPosition() {
 void TriangleRenderComponent::SetPosition(sf::Vector2f position) {
     shape.setPosition(position);
     pointer.setPosition(position);
+    sprite.setPosition(position);
 }
 
 sf::Color TriangleRenderComponent::GetColor() {

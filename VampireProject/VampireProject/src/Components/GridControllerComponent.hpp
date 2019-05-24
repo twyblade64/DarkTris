@@ -32,6 +32,8 @@ public:
 private:
 	void RotateRight(int node);
 	void RotateLeft(int node);
+	void ResetPosition(int node);
+	void RotateNode(int node);
 private:
 	sf::Vector2f position;
 	sf::Vector2i dimensions;

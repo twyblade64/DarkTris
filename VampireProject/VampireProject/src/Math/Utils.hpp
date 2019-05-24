@@ -3,6 +3,7 @@
 
 #include "SFML/System.hpp"
 #include <math.h>
+#include <iostream>
 
 inline sf::Vector2f Vector3fToVector2f(sf::Vector3f v) {
 	return sf::Vector2f(v.x, v.y);
@@ -78,5 +79,15 @@ inline sf::Vector3f Vector3fAbs(sf::Vector3f a) {
 	a.z = abs(a.z);
 	return a;
 }
+
+inline std::ostream& operator << (std::ostream& out, sf::Vector3f a) {
+	out << "(" << a.x << "," << a.y << "," << a.z << ")";
+	return out;
+}
+
+inline std::ostream& operator << (std::ostream& out, sf::Vector2f a) {
+	return out << "(" << a.x << "," << a.y << ")";
+}
+
 
 #endif // HEX_UTILS_H_

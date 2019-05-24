@@ -2,6 +2,7 @@
 #define HEX_QUATERNION_H_
 
 #include <math.h>
+#include <iostream>
 #include "Utils.hpp"
 #include "Constants.hpp"
 #include "SFML/System.hpp"
@@ -48,5 +49,6 @@ Quaternion operator*(const Quaternion& lhs, const float& rhs);
 Quaternion operator*(const float& lhs, const Quaternion& rhs);
 Quaternion operator+(const Quaternion& lhs, const Quaternion& rhs);
 Quaternion operator*(const Quaternion& lhs, const Quaternion& rhs);
+std::ostream& operator<<(std::ostream& lhs, const Quaternion& rhs);
 
 #endif // HEX_QUATERNION_H_

@@ -3,11 +3,14 @@
 ResourceLoader::ResourceLoader() {}
 
 sf::Texture* ResourceLoader::LoadTexture(int id, const std::string& filename) {
+    if (CheckTexture(id)) return GetTexture(id);
+
     std::unique_ptr<sf::Texture> ptr = std::unique_ptr<sf::Texture>(new sf::Texture());
     if (ptr->loadFromFile(filename))
         mTextureMap[id] = std::move(ptr);
     else
         mTextureMap[id] = nullptr;
+
     return mTextureMap[id].get();
 }
 
@@ -25,11 +28,14 @@ void ResourceLoader::UnloadTexture(int id) {
 
 
 sf::Font* ResourceLoader::LoadFont(int id, const std::string& filename) {
+    if (CheckFont(id)) return GetFont(id);
+
     std::unique_ptr<sf::Font> ptr = std::unique_ptr<sf::Font>(new sf::Font());
     if (ptr->loadFromFile(filename))
         mFontMap[id] = std::move(ptr);
     else
         mFontMap[id] = nullptr;
+
     return mFontMap[id].get();
 }
 

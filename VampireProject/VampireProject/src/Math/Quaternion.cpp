@@ -173,3 +173,7 @@ Quaternion operator*(const Quaternion& lhs, const Quaternion& rhs) {
 	float        qs = rhs.ScalarComponent();
 	return Quaternion(ps*qv + qs * pv + Vector3fCross(pv, qv), ps*qs - Vector3fDot(pv, qv));
 }
+
+std::ostream& operator<<(std::ostream& lhs, const Quaternion& rhs) {
+	return lhs << "(" << rhs.x << "," << rhs.y << "," << rhs.z << "," << rhs.w << ")";
+}

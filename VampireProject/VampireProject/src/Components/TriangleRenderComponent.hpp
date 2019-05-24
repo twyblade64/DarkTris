@@ -25,6 +25,7 @@ private:
     float size;
     sf::ConvexShape shape;
     sf::ConvexShape pointer;
+	sf::Sprite sprite;
 };
 
 #endif // HEX_TRIANGLE_RENDER_COMPONENT_H_
