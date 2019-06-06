@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Utils.hpp"
 #include "Constants.hpp"
-#include "SFML/System.hpp"
+#include "SFML/System.hpp" 
 
 #define DEG2RAD 0.01745329251f
 #define RAD2DEG 57.2957795131f
@@ -13,7 +13,6 @@
 struct Quaternion {
 public:
 	Quaternion();
-	//Quaternion(Quaternion&& other);
 	Quaternion(float x, float y, float z, float w);
 	Quaternion(sf::Vector3f v, float s);
 public:

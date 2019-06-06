@@ -131,6 +131,7 @@
     <ClCompile Include="src\Components\TriangleRenderComponent.cpp" />
     <ClCompile Include="src\Components\ButtonControllerComponent.cpp" />
     <ClCompile Include="src\Components\DefaultButtonControllerComponent.cpp" />
+    <ClCompile Include="src\Components\TileConfigurationComponent.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
     <ClCompile Include="src\Core\Locator.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -150,6 +151,8 @@
     <ClInclude Include="src\Components\TriangleRenderComponent.hpp" />
     <ClInclude Include="src\Components\ButtonControllerComponent.hpp" />
     <ClInclude Include="src\Components\DefaultButtonControllerComponent.hpp" />
+    <ClInclude Include="src\Components\TileConfiguration.hpp" />
+    <ClInclude Include="src\Components\TileConfigurationComponent.hpp" />
     <ClInclude Include="src\Constants\Resources.hpp" />
     <ClInclude Include="src\Core\Component.hpp" />
     <ClInclude Include="src\Core\Game.hpp" />

@@ -3,9 +3,9 @@
 #include "../Math/Utils.hpp"
 #include "../Core/Locator.hpp"
 
-TriangleTile::TriangleTile(sf::Vector2f position, float size, sf::Color color, float rotationAngle) :
-    GameObject<TriangleTile>(position), mTriangleRenderComponent(position, size, color, rotationAngle) {
-
+TriangleTile::TriangleTile(sf::Vector2f position, float size, sf::Color color, float rotationAngle, TileConfiguration configuration) :
+    GameObject<TriangleTile>(position), 
+    mTriangleRenderComponent(position, size, color, rotationAngle), mTileConfigurationComponent(configuration) {
 }
 
 TriangleTile::~TriangleTile() {
@@ -27,3 +27,8 @@ void TriangleTile::RenderImplementation() {
 TriangleRenderComponent& TriangleTile::GetTriangleRenderComponent() {
     return mTriangleRenderComponent;
 }
+
+TileConfigurationComponent& TriangleTile::GetConfigurationComponent() {
+    return mTileConfigurationComponent;
+}
+

@@ -40,7 +40,7 @@ void TriangleRenderComponent::RenderImplementation() {
     sf::RenderWindow& rw = Locator::GetWindow().GetRenderWindow();
     rw.draw(shape);
     rw.draw(sprite);
-    //rw.draw(pointer);
+    // rw.draw(pointer);
 }
 
 float TriangleRenderComponent::GetRotationAngle() {

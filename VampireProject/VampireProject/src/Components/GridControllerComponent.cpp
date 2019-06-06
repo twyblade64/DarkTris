@@ -15,6 +15,7 @@ GridControllerComponent::GridControllerComponent(sf::Vector2i dimensions, float 
     nodePositionList = std::vector<sf::Vector2f>(dimensions.x * dimensions.y);
     pivotNodeList = std::vector<std::unique_ptr<PivotNode>>(dimensions.x * dimensions.y);
     triangleTileList = std::vector<std::unique_ptr<TriangleTile>>((dimensions.x-1) * (dimensions.y - 1) * 2);
+    targetConfiguration = std::vector<TileConfiguration>((dimensions.x-1) * (dimensions.y - 1) * 2);
 
     for (int i = 0; i < dimensions.x * dimensions.y; ++i) {
         int x = i%dimensions.x;
@@ -81,28 +82,50 @@ bool GridControllerComponent::RemovePivotNode(int x, int y) {
     return true;
 }
 
-bool GridControllerComponent::SetTriangleTile(int x, int y, sf::Color color, int dir) {
+bool GridControllerComponent::SetTriangleTile(int x, int y, TileConfiguration configuration) {
     if (!(x >= 0 && y >= 0 && x < (dimensions.x - 1) * 2 && y < (dimensions.y - 1)))
         return false;
-    triangleTileList[y * (dimensions.x-1)*2 + x] = std::unique_ptr<TriangleTile>(new TriangleTile(
-        sf::Vector2f(triangleBase * 0.5f * (1 + x), y * triangleHeight + ((x + y) % 2 == 0 ? triangleHeight - triangleRad : triangleRad)) + position,
-        triangleBase,
-        color,
-        ((x + y) % 2 == 0 ? 180 : 0) + dir * 120));
-    return true;
+    targetConfiguration[y * (dimensions.x-1)*2 + x] = configuration;
 }
 
-void GridControllerComponent::GenerateMissingTriangles(sf::Color color) {
-    for (int y = 0; y < (dimensions.y - 1); ++y) {
-        for (int x = 0; x < (dimensions.x - 1) * 2; ++x) {
-            if (triangleTileList[y * (dimensions.x-1)*2 + x] == nullptr) {
-                if (CheckTrianglePivotNeighbour(x, y)) {
-                    SetTriangleTile(x, y, color);
-                }
-            }
-        }
+void GridControllerComponent::GenerateTriangles() {
+    int length = (dimensions.x-1) * (dimensions.y - 1) * 2;
+    for (int i = 0; i < length; ++i) {
+        triangleTileList[i] = nullptr;
+        int x = i % ((dimensions.x-1) * 2);
+        int y = i / ((dimensions.x-1) * 2);
+        TileConfiguration config = targetConfiguration[i];
+        triangleTileList[i] = std::unique_ptr<TriangleTile>(new TriangleTile(
+            sf::Vector2f(triangleBase * 0.5f * (1 + x), y * triangleHeight + ((x + y) % 2 == 0 ? triangleHeight - triangleRad : triangleRad)) + position,
+            triangleBase,
+            sf::Color(config.GetColor()),
+            ((x + y) % 2 == 0 ? 180 : 0) + config.GetNormDir() * 120, 
+            config
+        ));
     }
 }
+
+void GridControllerComponent::Scramble(int iterations) {
+    std::vector<int> availableNodes = std::vector<int>();
+    for (int i = 0; i < dimensions.x * dimensions.y; ++i) 
+        if (pivotNodeList[i] != nullptr)
+            availableNodes.push_back(i);
+    for (int i = 0; i < iterations; ++i) {
+        int rndNode = rand() % availableNodes.size();
+        int rndDir = rand() % 2;
+
+        if (rndDir == 0)
+            RotateLeft(availableNodes[rndNode]);
+        else
+            RotateRight(availableNodes[rndNode]);
+    }
+}
+
+bool GridControllerComponent::CheckTargetStatus() {
+    // TODO Implement
+    return false;
+}
+
 
 bool GridControllerComponent::RemoveTriangleTile(int x, int y) {
     if (!(x >= 0 && y >= 0 && x < (dimensions.x - 1) * 2 && y < (dimensions.y - 1)))

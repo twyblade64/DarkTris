@@ -6,6 +6,7 @@
 #include <memory>
 #include "SFML/System.hpp"
 #include "SFML/Graphics.hpp"
+#include "TileConfiguration.hpp"
 
 class TriangleTile;
 class PivotNode;
@@ -21,10 +22,12 @@ public:
 public:
 	bool SetPivotNode(int x, int y);
 	bool RemovePivotNode(int x, int y);
-	bool SetTriangleTile(int x, int y, sf::Color = sf::Color(255, 255, 255), int dir = 0);
-	void GenerateMissingTriangles(sf::Color = sf::Color(255,255,255));
 	bool RemoveTriangleTile(int x, int y);
 	bool CheckTrianglePivotNeighbour(int x, int y);
+	bool SetTriangleTile(int x, int y, TileConfiguration configuration);
+	void GenerateTriangles();
+	void Scramble(int iterations);
+	bool CheckTargetStatus();
 public:
 	void OnMousePress();
 	void OnMouseRelease();
@@ -51,6 +54,7 @@ private:
 	std::vector<sf::Vector2f> nodePositionList;
 	std::vector<std::unique_ptr<TriangleTile>> triangleTileList;
 	std::vector<std::unique_ptr<PivotNode>> pivotNodeList;
+	std::vector<TileConfiguration> targetConfiguration;
 };
 
 #endif // HEX_GRID_CONTROLLER_COMPONENT_H_

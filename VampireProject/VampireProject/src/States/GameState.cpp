@@ -14,22 +14,25 @@ void GameState::Enter() {
 	gcc.SetPivotNode(1,2);
 	gcc.SetPivotNode(2,2);
 
-	gcc.SetTriangleTile(1,0, sf::Color(255,100,50), 1);
-	gcc.SetTriangleTile(2,0, sf::Color(255,100,50), 0);
-	gcc.SetTriangleTile(3,0, sf::Color(255,100,50),-1);
-	gcc.SetTriangleTile(3,1, sf::Color(255,100,50), 1);
+	gcc.SetTriangleTile(1,0, TileConfiguration(TILE_TYPE_RED  , TILE_DIR_RIGHT));
+	gcc.SetTriangleTile(2,0, TileConfiguration(TILE_TYPE_RED  , TILE_DIR_NONE ));
+	gcc.SetTriangleTile(3,0, TileConfiguration(TILE_TYPE_RED  , TILE_DIR_LEFT ));
+	gcc.SetTriangleTile(3,1, TileConfiguration(TILE_TYPE_RED  , TILE_DIR_RIGHT));
 
-	gcc.SetTriangleTile(0,1, sf::Color(50,255,50),  1);
-	gcc.SetTriangleTile(1,1, sf::Color(50,255,50),  0);
-	gcc.SetTriangleTile(0,2, sf::Color(50,255,50), -1);
-	gcc.SetTriangleTile(1,2, sf::Color(50,255,50),  0);
+	gcc.SetTriangleTile(0,1, TileConfiguration(TILE_TYPE_GREEN, TILE_DIR_RIGHT));
+	gcc.SetTriangleTile(1,1, TileConfiguration(TILE_TYPE_GREEN, TILE_DIR_NONE ));
+	gcc.SetTriangleTile(0,2, TileConfiguration(TILE_TYPE_GREEN, TILE_DIR_LEFT ));
+	gcc.SetTriangleTile(1,2, TileConfiguration(TILE_TYPE_GREEN, TILE_DIR_NONE ));
 
-	gcc.SetTriangleTile(2,2, sf::Color(50,50,255), -1);
-	gcc.SetTriangleTile(3,2, sf::Color(50,50,255),  0);
-	gcc.SetTriangleTile(4,2, sf::Color(50,50,255),  1);
-	gcc.SetTriangleTile(4,1, sf::Color(50,50,255), -1);
+	gcc.SetTriangleTile(2,2, TileConfiguration(TILE_TYPE_BLUE , TILE_DIR_LEFT ));
+	gcc.SetTriangleTile(3,2, TileConfiguration(TILE_TYPE_BLUE , TILE_DIR_NONE ));
+	gcc.SetTriangleTile(4,2, TileConfiguration(TILE_TYPE_BLUE , TILE_DIR_RIGHT));
+	gcc.SetTriangleTile(4,1, TileConfiguration(TILE_TYPE_BLUE , TILE_DIR_LEFT ));
 
-	gcc.GenerateMissingTriangles(sf::Color(50,50,50));
+	gcc.GenerateTriangles();
+
+	gcc.Scramble(100);
+
 	mGame.objectList.push_back(std::move(p_grid));
 }
 
